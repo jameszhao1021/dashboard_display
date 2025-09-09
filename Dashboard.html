@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="10" />
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        background: #fff;            /* letterbox bars */
+      }
+      .wrap {
+        height: 100%;
+        width: 100%;
+        display: grid;
+        place-items: center;
+      }
+      img {
+        max-width: 100vw;
+        max-height: 100vh; 
+        width: auto;                 /* preserve ratio */
+        height: auto;                /* preserve ratio */
+        object-fit: contain;         /* no cropping, no stretch */
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <img src="https://odoo-dash-snapshot.s3.ap-southeast-2.amazonaws.com/testdashboard.png" alt="Dashboard" />
+    </div>
+  </body>
+</html>
