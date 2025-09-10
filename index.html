@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="10" />
+    <meta charset="utf-8" />
+    <title>Dashboard Rotator</title>
     <style>
       html, body {
         height: 100%;
         margin: 0;
-        background: #fff;            /* letterbox bars */
+        background: #fff;
       }
       .wrap {
         height: 100%;
@@ -16,17 +17,39 @@
       }
       img {
         max-width: 100vw;
-        max-height: 100vh; 
-        width: auto;                 /* preserve ratio */
-        height: auto;                /* preserve ratio */
-        object-fit: contain;         /* no cropping, no stretch */
+        max-height: 100vh;
+        width: auto;             /* preserve ratio */
+        height: auto;            /* preserve ratio */
+        object-fit: contain;     /* no crop, no stretch */
         display: block;
       }
     </style>
   </head>
   <body>
     <div class="wrap">
-      <img src="https://odoo-dash-snapshot.s3.ap-southeast-2.amazonaws.com/testdashboard.png" alt="Dashboard" />
+      <img id="dash" alt="Dashboard" />
     </div>
+
+    <script>
+      // Put your two image URLs here:
+      const IMAGES = [
+        "https://odoo-dash-snapshot.s3.ap-southeast-2.amazonaws.com/testdashboard.png",
+        "https://odoo-dash-snapshot.s3.ap-southeast-2.amazonaws.com/testninja1.png"
+      ];
+
+      const INTERVAL_MS = 10_000; // 10 seconds
+      const img = document.getElementById("dash");
+      let i = 0;
+
+      function loadNext() {
+        const url = IMAGES[i] + "?t=" + Date.now(); // cache-buster
+        img.src = url;
+        i = (i + 1) % IMAGES.length; // loop 0 -> 1 -> 0 -> ...
+      }
+
+      // start immediately, then every 10s
+      loadNext();
+      setInterval(loadNext, INTERVAL_MS);
+    </script>
   </body>
 </html>
